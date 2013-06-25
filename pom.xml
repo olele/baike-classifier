@@ -15,9 +15,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.googlecode.ictclas4j</groupId>
-      <artifactId>ictclas4j</artifactId>
-      <version>1.0.1</version>
+      <groupId>ansj_seq</groupId>
+      <artifactId>ansj_seq</artifactId>
+      <scope>system</scope>
+      <version>1.0</version>
+      <systemPath>${project.basedir}/lib/ans_seg-20130615.jar</systemPath>
     </dependency>
   </dependencies>
 </project>
