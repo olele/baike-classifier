@@ -1,0 +1,24 @@
+There are two data files provided by TA:
+  baidu-article.dat
+and
+  baidu-taxonomy.dat.
+
+You should copy these two files in data/ directory.
+
+The .dat file are encoded in UTF-8.
+
+Each line of baidu-taxonomy.dat is 
+	super-category \t sub-category-1;sub-category-2;...
+
+Each line of baidu-article.dat is 
+	flag : content
+
+flag
+	I - id
+	T - title
+	R - related entities // split by ::;
+	A - abstract (first paragraph)
+	L - links // split by ::;
+	C - categories
+	IB - infobox // each pair is split by ::; and attribute-value is split by ::=
+	S - synonym
