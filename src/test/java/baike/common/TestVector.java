@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestVector {
-	private static final double PRECISION = 1E-10;
+	private static final float PRECISION = 1E-10f;
 
 	private Random random = new Random();
 	private final int dimension = 100;
@@ -37,13 +37,13 @@ public class TestVector {
 		Vector readVector = new Vector(dimension);
 		readVector.readFields(in);
 		// Check equality
+		System.out.println(vector);
+		System.out.println(readVector);
 		Assert.assertEquals(vector, readVector);
 	}
 	
 	@Test
 	public void testGetSet() {
-		int dimension = 100;
-		Vector vector = new Vector(dimension);
 		for(int i = 0; i < dimension; i++) {
 			// Values are 0 by default
 			Assert.assertEquals(0, vector.get(i), PRECISION);
@@ -52,5 +52,18 @@ public class TestVector {
 			vector.set(i, newVal);
 			Assert.assertEquals(newVal, vector.get(i), PRECISION);
 		}
+	}
+	
+	@Test
+	public void testToArray() {
+		float[] expectedArray = new float[dimension];
+		for(int i = 0; i < dimension; i++) {
+			float val = random.nextFloat();
+			expectedArray[i] = val;
+			vector.set(i, val);
+		}
+		float[] actualArray = new float[dimension];
+		vector.toArray(actualArray);
+		Assert.assertArrayEquals(expectedArray, actualArray, PRECISION);
 	}
 }

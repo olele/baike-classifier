@@ -16,9 +16,7 @@ public enum Category {
 	NATURE, SPORTS;
 	
 	public static Category getCategory(String subCategoryName) {
-		if(allCategories == null) {
-				init();
-		}
+		if(allCategories == null) init();
 		return allCategories.get(subCategoryName);
 	}
 		
