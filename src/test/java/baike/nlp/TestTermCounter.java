@@ -30,6 +30,13 @@ public class TestTermCounter {
 	}
 	
 	@Test
+	public void test() {
+		String text = "三级跳又称为三级跳远，是田径中的其中一个项目之一";
+		counter.update(text);
+		System.out.println(counter);
+	}
+	
+	@Test
 	public void testSegmentation() {
 		String text = "Ansj中文分词是一个真正的ict的实现.并且加入了自己的一些数据结构" +
 									"和算法的分词.实现了高效率和高准确率的完美结合!";

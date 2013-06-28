@@ -2,6 +2,7 @@ package baike.nlp;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +14,8 @@ public class TermCounter {
 	private Map<String, Counter> counter;
 	
 	public TermCounter() {
-		counter = new HashMap<String, Counter>();
+		// order preserving hash map
+		counter = new LinkedHashMap<String, Counter>();
 	}
 
 	public void reset() {

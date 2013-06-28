@@ -7,16 +7,17 @@ import java.io.InputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
+import baike.common.DataLoader;
+
 public class TestRawData {
 	@Test
 	public void testLoadFromFile() throws IOException {
-		InputStream rawDataIn = RawData.class.getResourceAsStream("/baidu-dump.dat.5000");
+		InputStream rawDataIn = DataLoader.getInputStream("baidu-dump.dat.5000");
 		RawData.Loader loader = new RawData.Loader(rawDataIn);
 		int expectedIndex = 1;
 		RawData raw = new RawData();
 		while(loader.next(raw)) {
 			Assert.assertEquals("" + expectedIndex, raw.get("ID"));
-			System.out.println(raw);
 			expectedIndex ++;
 		}
 	}
@@ -47,9 +48,7 @@ public class TestRawData {
 			sb.append(keys[ei]).append(':').append(vals[ei]).append('\n');
 		}
 		String strRawData = sb.toString();
-		ByteArrayInputStream rawDataIn = 
-				new ByteArrayInputStream(strRawData.getBytes());
-		RawData.Loader loader = new RawData.Loader(rawDataIn);
+		RawData.Loader loader = str2Raw(strRawData);
 		RawData raw = new RawData();
 		Assert.assertTrue(loader.next(raw));
 		for(int ei = 0; ei < numEntries; ei++) {
@@ -59,5 +58,11 @@ public class TestRawData {
 			Assert.assertEquals(expectedVal, actualVal);
 		}
 		Assert.assertFalse(loader.next(raw));
+	}
+	
+	public static RawData.Loader str2Raw(String strRawData) {		
+		ByteArrayInputStream rawDataIn = 
+				new ByteArrayInputStream(strRawData.getBytes());
+		return new RawData.Loader(rawDataIn);
 	}
 }
