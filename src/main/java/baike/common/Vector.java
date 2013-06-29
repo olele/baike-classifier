@@ -46,6 +46,10 @@ public class Vector implements Writable {
 		vals.put(Integer.valueOf(index), Float.valueOf(val));
 	}
 	
+	public void increase(int index, float val) {
+		set( index, get(index) + val );
+	}
+	
 	public int dimension() {
 		return dimension;
 	}

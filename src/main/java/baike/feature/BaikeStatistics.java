@@ -52,6 +52,7 @@ public class BaikeStatistics implements Writable {
 		term2Index = new LinkedHashMap<String, Integer>();
 		numTerms 	= 0;
 		capacity  = 1024;
+		terms			= new String[capacity];
 		termFreqs = new int[capacity];
 		docFreqs  = new int[capacity];
 		total 		= 0;
@@ -60,6 +61,7 @@ public class BaikeStatistics implements Writable {
 	private Map<String, Integer> term2Index;
 	private int numTerms;
 	private int capacity;
+	private String[] terms;
 	private int[] termFreqs;
 	private int[] docFreqs;
 	private long total;
@@ -69,9 +71,12 @@ public class BaikeStatistics implements Writable {
 		Set<String> newTerms = counter.getTerms();
 		for(String term : newTerms) {
 			if(!term2Index.containsKey(term)) {
-				term2Index.put(term, Integer.valueOf(numTerms++));
+				term2Index.put(term, Integer.valueOf(numTerms));
+				terms[numTerms] = term;
+				numTerms ++;
 				if(numTerms == capacity) {
 					capacity *= 2;
+					terms			= Arrays.copyOf(terms, capacity);
 					termFreqs = Arrays.copyOf(termFreqs, capacity);
 					docFreqs  = Arrays.copyOf(termFreqs, capacity);
 				}
@@ -95,6 +100,10 @@ public class BaikeStatistics implements Writable {
 	
 	public int getNumTerms() {
 		return numTerms;
+	}
+	
+	public String getTerm(int index) {
+		return terms[index];
 	}
 	
 	public int getTermIndex(String term) {
@@ -163,10 +172,12 @@ public class BaikeStatistics implements Writable {
 	public void readFields(DataInput in) throws IOException {
 		term2Index.clear();
 		numTerms = capacity = in.readInt();
+		terms = new String[capacity];
 		total = in.readLong();
 		for(int index = 0; index < numTerms; index++) {
 			String term = in.readUTF();
 			term2Index.put(term, index);
+			terms[index] = term;
 		}
 		termFreqs = new int[numTerms];
 		for(int index = 0; index < numTerms; index++) 

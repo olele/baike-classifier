@@ -5,11 +5,14 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import baike.common.Category;
 
 public class RawData {
 	public static class Loader implements Closeable {
@@ -59,6 +62,34 @@ public class RawData {
 	
 	public void reset() {
 		keyVals.clear();
+	}
+	
+	public int getID() {
+		return Integer.parseInt( get("ID") );
+	}
+	
+	
+	private ArrayList<Category> categories = new ArrayList<Category>();
+	public Category[] getCategories() {
+		String strVal = get("Category");
+		if(strVal == null) return null;
+		
+		categories.clear();
+		String[] strCategories = split(strVal);
+		for(String strCtg : strCategories) {
+			Category ctg = Category.getCategory(strCtg);
+			if(ctg != null && !categories.contains(ctg))
+				categories.add(ctg);
+		}
+		return categories.toArray(new Category[categories.size()]);
+	}
+	
+	private String[] split(String val) {
+		return val.split("::;");
+	}
+	
+	public String getFulltext() {
+		return get("FullText");
 	}
 	
 	public void set(String key, String val) {

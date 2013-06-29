@@ -10,8 +10,8 @@ import org.junit.Test;
 import baike.common.DataLoader;
 
 public class TestBaikeStatistics {
-	private final String BAIKE_RAW_FILE 	= "baidu-dump.dat.50000";
-	private final String BAIKE_STATS_FILE = "baike-stats.dat.50000";
+	private final String BAIKE_RAW_FILE 	= "baidu-dump.dat.50";
+	private final String BAIKE_STATS_FILE = "baike-stats.dat.50";
 	
 	@Test 
 	public void testReadWrite() throws IOException {		

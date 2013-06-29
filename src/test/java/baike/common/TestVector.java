@@ -24,7 +24,7 @@ public class TestVector {
 	}
 	
 	@Test
-	public void testIO() throws IOException {
+	public void testWriteRead() throws IOException {
 		// Write 
 		ByteArrayOutputStream out0 = new ByteArrayOutputStream();
 		DataOutputStream out = new DataOutputStream(out0);
