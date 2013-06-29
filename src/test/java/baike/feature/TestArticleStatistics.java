@@ -4,24 +4,21 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import baike.common.Category;
 import baike.common.DataLoader;
-import baike.common.Vector;
 
 public class TestArticleStatistics {
-	private final String BAIKE_RAW_FILE 	= "baidu-dump.dat.50";
-	private final String BAIKE_STATS_FILE = "baike-stats.dat.50";
-	private final String ARTICLE_STATS_FILE = "article-stats.dat.50";
+	private final String BAIKE_RAW_FILE 	= "baidu-dump.dat.50000";
+	private final String BAIKE_STATS_FILE = "baike-stats.dat.50000";
+	private final String ARTICLE_STATS_FILE = "article-stats.dat.50000";
 	
 	private BaikeStatistics baikeStats = null;
 	
@@ -42,7 +39,7 @@ public class TestArticleStatistics {
 		ArticleStatistics.Loader loader = new ArticleStatistics.Loader(artStatsIn);
 		ArticleStatistics artStats = new ArticleStatistics(baikeStats);
 		while(loader.next(artStats)) {
-			System.out.println(artStats);
+//			System.out.println(artStats);
 		}
 		loader.close();
 	}

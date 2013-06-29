@@ -84,22 +84,29 @@ public class ArticleStatistics implements Writable {
 	private int ID;
 	private Category[] categories; 
 	private Vector feature;
+	private int total;
 	
 	public ArticleStatistics(BaikeStatistics baikeStats) {
 		this.baikeStats = baikeStats;
 		int numTerms = baikeStats.getNumTerms();
 		this.categories = null;
 		this.feature = new Vector(numTerms);
+		this.total = 0;
 	}
 	
 	public void reset() {
 		ID = -1;
 		categories = null;
 		feature.reset();
+		total = 0;
 	}
 
 	public int getID() {
 		return ID;
+	}
+	
+	public int getTotal() {
+		return total;
 	}
 	
 	public Category[] getCategories() {
@@ -126,6 +133,7 @@ public class ArticleStatistics implements Writable {
 			int termIndex = baikeStats.getTermIndex(term);
 			feature.set( termIndex, counter.getCount(term) );
 		}
+		total += counter.getTotalTerms();
 	}
 	
 	@Override

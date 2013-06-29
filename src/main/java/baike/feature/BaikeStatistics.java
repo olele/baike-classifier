@@ -82,10 +82,11 @@ public class BaikeStatistics implements Writable {
 				}
 			}
 		}
+		// increase the count for all terms
+		total += counter.getTotalTerms();
 		// accumulate frequency
 		for(String term : newTerms) {
 			int count = counter.getCount(term);
-			total += count;
 			Integer termIndex = term2Index.get(term);
 			// add term frequency
 			termFreqs[termIndex] += count;
