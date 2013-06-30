@@ -24,7 +24,6 @@ public class ArticleStatistics implements Writable {
 	public static void build(OutputStream artStatsOut, InputStream rawDataIn, 
 													 BaikeStatistics stats) throws IOException 
 	{
-		
 		DataOutputStream out = new DataOutputStream(artStatsOut);
 		RawData.Loader rawDataLoader = new RawData.Loader(rawDataIn);
 		RawData rawData = new RawData();
