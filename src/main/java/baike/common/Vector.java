@@ -72,6 +72,24 @@ public class Vector implements Writable {
 		return array;
 	}
 	
+	public double[] toArray(double[] array) {
+		// Make sure array has correct size and is filled with 0s
+		if(array.length != dimension) 
+			array = new double[dimension];
+		else 
+			Arrays.fill(array, 0.0f);
+		
+		Iterator<Entry<Integer, Float>> it = iterator();
+		Entry<Integer, Float> entry; Integer index; Float val;
+		while(it.hasNext()) {
+			entry = it.next(); index = entry.getKey(); val = entry.getValue();
+			// Set non-zero values
+			array[index.intValue()] = val.floatValue();
+		}
+		
+		return array;
+	}
+	
 	public void write(DataOutput out) throws IOException {
 		out.writeInt(dimension);
 		
