@@ -21,6 +21,20 @@
       <version>1.0</version>
       <systemPath>${project.basedir}/lib/ans_seg-20130615.jar</systemPath>
     </dependency>
+	<dependency>
+      <groupId>libsvm</groupId>
+      <artifactId>libsvm</artifactId>
+      <scope>system</scope>
+      <version>1.0</version>
+      <systemPath>${project.basedir}/lib/libsvm.jar</systemPath>
+    </dependency>
+	<dependency>
+      <groupId>neuroph</groupId>
+      <artifactId>neuroph</artifactId>
+      <scope>system</scope>
+      <version>1.0</version>
+      <systemPath>${project.basedir}/lib/neuroph-core-2.7.jar</systemPath>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
