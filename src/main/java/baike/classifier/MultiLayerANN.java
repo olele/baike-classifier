@@ -1,4 +1,4 @@
-package baike.ann;
+package baike.classifier;
 
 import java.util.ArrayList;
 
@@ -6,14 +6,14 @@ import org.neuroph.core.learning.DataSet;
 import org.neuroph.core.learning.DataSetRow;
 import org.neuroph.nnet.MultiLayerPerceptron;
 
-public class ANN {
+public class MultiLayerANN {
 	public int input_dim;
 	public int output_dim;
 	int data_length;
 	DataSet trainingSet;
 	MultiLayerPerceptron mp;
 	
-	public ANN( int FirstLayer, int MiddleLayer, int LastLayer )
+	public MultiLayerANN( int FirstLayer, int MiddleLayer, int LastLayer )
 	{
 		data_length = 0;
 		input_dim = FirstLayer;
@@ -66,7 +66,7 @@ public class ANN {
 //			new ANN(i, 1000, 10);
 //			System.out.println(System.currentTimeMillis()-l);
 //		}
-		new ANN(10000, 1000, 10);
+		new MultiLayerANN(10000, 1000, 10);
 		
 		
 	}

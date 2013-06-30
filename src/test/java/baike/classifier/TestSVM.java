@@ -1,17 +1,18 @@
-package baike.main;
+package baike.classifier;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.junit.Test;
+
 import baike.classifier.MultiClassSVM;
-import baike.classifier.MultiLayerANN;
 import baike.common.*;
 import baike.feature.*;
 import baike.nlp.*;
 
-public class Entrance {
+public class TestSVM {
 
 	private final String BAIKE_RAW_FILE = "baidu-dump.dat.200k";
 	private final String BAIKE_STATS_FILE = "baike-stats.dat.200k";
@@ -20,7 +21,6 @@ public class Entrance {
 	private ArticleStatistics artStats = null;
 	ArticleStatistics.Loader loader = null;
 	
-
 	void get_data() throws IOException
 	{
 		/*
@@ -50,32 +50,10 @@ public class Entrance {
 		artStats = new ArticleStatistics(baikeStats);
 	}
 	
-	void ann_classify() throws IOException {
-		get_data();
-		/*
-		 * create ANN
-		 */
-		System.out.println("ann: "+baikeStats.getNumTerms()+","+baikeStats.getNumTerms()*2+","+12);
-		double[] double_array = new double[1];
-		MultiLayerANN ann = new MultiLayerANN( baikeStats.getNumTerms(), baikeStats.getNumTerms()*2, 12 );
-		int train_count = 0;
-		while (loader.next(artStats)) {
-			if ( train_count < 100 )
-			{
-				Category[] c = artStats.getCategories();
-				double[] labels = new double[ann.output_dim];
-				for ( int i=0; i<c.length; i++ )
-					labels[ c[i].ordinal() ] = 1; 
-				ann.addDataSetRow(artStats.getFeature().toArray(double_array), labels);
-			}
-			train_count++;
-		}
-		loader.close();
-	}
-	
+	@Test
 	public void svm_classify() throws IOException
 	{
-		get_data();		
+		get_data();
 		/*
 		 * create ANN
 		 */
@@ -144,12 +122,5 @@ public class Entrance {
 			System.out.println("predict: " + predict);
 		}
 		System.out.println("right: "+right+"/"+total);
-		
-	}
-
-	public static void main(String[] args) throws IOException {
-		Entrance e = new Entrance();
-//		e.ann_classify();
-		e.svm_classify();
 	}
 }

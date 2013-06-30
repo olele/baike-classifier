@@ -1,4 +1,4 @@
-package baike.svm;
+package baike.classifier;
 
 import java.util.StringTokenizer;
 import java.util.Vector;
